@@ -10,7 +10,7 @@ jobs:
       - name: Check Domain Health
         id: check_domain
         run: |
-          domain="https://circonomy.co"
+          domain="https://dev.circonomy.co"
           status_code=$(curl -s -o /dev/null -w "%{http_code}" $domain)
 
           if [ $status_code -eq 200 ]; then
