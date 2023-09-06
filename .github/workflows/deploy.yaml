@@ -19,3 +19,59 @@ jobs:
             echo "Domain $domain is not healthy (HTTP status code: $status_code)"
             echo "::set-output name=unhealthy::true"
           fi
+      - name: Notify Slack
+        if: steps.check_domain.outputs.unhealthy == 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"Domain $domain is not healthy. Check it now!\"}" \
+          $SLACK_WEBHOOK_URL
+  check_domain1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Domain Health
+        id: check_domain1
+        run: |
+          domain="https://dev.circonomy.co"
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" $domain)
+
+          if [ $status_code -eq 200 ]; then
+            echo "Domain $domain is healthy (HTTP status code: $status_code)"
+          else
+            echo "Domain $domain is not healthy (HTTP status code: $status_code)"
+            echo "::set-output name=unhealthy::true"
+          fi
+      - name: Notify Slack
+        if: steps.check_domain1.outputs.unhealthy == 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"Domain $domain is not healthy. Check it now!\"}" \
+          $SLACK_WEBHOOK_URL
+  check_domain2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Domain Health
+        id: check_domain2
+        run: |
+          domain="https://dev.circonomy.co"
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" $domain)
+
+          if [ $status_code -eq 200 ]; then
+            echo "Domain $domain is healthy (HTTP status code: $status_code)"
+          else
+            echo "Domain $domain is not healthy (HTTP status code: $status_code)"
+            echo "::set-output name=unhealthy::true"
+          fi
+      - name: Notify Slack
+        if: steps.check_domain2.outputs.unhealthy == 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{\"text\":\"Domain $domain is not healthy. Check it now!\"}" \
+          $SLACK_WEBHOOK_URL
