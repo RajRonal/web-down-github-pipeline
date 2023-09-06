@@ -1,0 +1,23 @@
+name: Check Domain Health
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"
+
+jobs:
+  check_domain:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Domain Health
+        id: check_domain
+        run: |
+          domain="https://circonomy.co"
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" $domain)
+
+          if [ $status_code -eq 200 ]; then
+            echo "Domain $domain is healthy (HTTP status code: $status_code)"
+          else
+            echo "Domain $domain is not healthy (HTTP status code: $status_code)"
+            echo "::set-output name=unhealthy::true"
+          fi
