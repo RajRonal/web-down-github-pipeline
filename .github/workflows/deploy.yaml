@@ -1,9 +1,7 @@
 name: Check Domain Health
-
-on:
+on: 
   schedule:
-    - cron: "*/5 * * * *"
-
+  - cron: '*/5 * * * *'
 jobs:
   check_domain:
     runs-on: ubuntu-latest
