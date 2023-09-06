@@ -1,7 +1,8 @@
 name: Check Domain Health
-on: 
+on:
+  # Triggers the workflow every 5 minutes
   schedule:
-  - cron: '*/5 * * * *'
+    - cron: "*/5 * * * *"
 jobs:
   check_domain:
     runs-on: ubuntu-latest
