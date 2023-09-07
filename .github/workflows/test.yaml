@@ -16,4 +16,4 @@ jobs:
     # For posting a simple plain text message
           slack-message: "testing slack token"
         env:
-           SLACK_BOT_TOKEN: ${{ secrets.TOKEN }}
+           SLACK_BOT_TOKEN: ${{ secrets.TOKEN_TEST }}
