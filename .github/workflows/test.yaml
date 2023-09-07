@@ -1,0 +1,14 @@
+name: hello-world
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: my-step
+        run: echo "Hello World!"
+      
+      - name:  uses slack
+        uses: "krider2010/slack-bot-action@1.0.1"
+        secrets: $token
+        MESSAGE_STRING = "{ \"channel\": \"C05HQSJH1RQ\", \"text\": \"\ testing  slack bot token appraoch" }"
+    
