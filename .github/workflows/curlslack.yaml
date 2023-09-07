@@ -21,11 +21,11 @@ jobs:
           else
               echo "Domain $domain is healthy (HTTP status code: $status_code)"
           fi
-      - name: Notify Slack
-        if: steps.check_domain.outputs.unhealthy == 'true'
-        env:
-          token: ${{ secrets.TOKEN }}
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-           --data '{"text": "Something important","channel": "#grafana-test"}'  https://hooks.slack.com/services/T0102D7QL75/B031EMHED6H/$token
+      # - name: Notify Slack
+      #   if: steps.check_domain.outputs.unhealthy == 'true'
+      #   env:
+      #     token: ${{ secrets.TOKEN }}
+      #   run: |
+      #     curl -X POST -H 'Content-type: application/json' \
+      #      --data '{"text": "Something important","channel": "#grafana-test"}'  https://hooks.slack.com/services/T0102D7QL75/B031EMHED6H/$token
   
