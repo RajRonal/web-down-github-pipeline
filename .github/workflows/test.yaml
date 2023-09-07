@@ -7,8 +7,13 @@ jobs:
       - name: my-step
         run: echo "Hello World!"
       
-      - name:  uses slack
-        uses: "krider2010/slack-bot-action@1.0.1"
-        secrets: $token
-        MESSAGE_STRING = "{ \"channel\": \"C05HQSJH1RQ\", \"text\": \"\ testing  slack bot token appraoch" }"
-    
+      - name: Post to a Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+  
+          channel-id: 'C04AZ89JHQE'
+    # For posting a simple plain text message
+          slack-message: "testing slack token"
+        env:
+           SLACK_BOT_TOKEN: ${{ secrets.token }}
