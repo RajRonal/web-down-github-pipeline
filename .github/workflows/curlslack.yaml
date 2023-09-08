@@ -1,31 +1,31 @@
-name: Check Domain Health
-on:
-  # Triggers the workflow every 5 minutes
-  schedule:
-    - cron: "*/5 * * * *"
-jobs:
-  check_domain:
-    runs-on: ubuntu-latest
+# name: Check Domain Health
+# on:
+#   # Triggers the workflow every 5 minutes
+#   schedule:
+#     - cron: "*/5 * * * *"
+# jobs:
+#   check_domain:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Check Domain Health
-        id: check_domain
-        run: |
-          domain="https://dev.circonomy.co"
-          status_code=$(curl -s -o /dev/null -w "%{http_code}" $domain)
+#     steps:
+#       - name: Check Domain Health
+#         id: check_domain
+#         run: |
+#           domain="https://dev.circonomy.co"
+#           status_code=$(curl -s -o /dev/null -w "%{http_code}" $domain)
 
-          if [ $status_code -eq 200  ]; then
-              echo "Domain $domain is not healthy (HTTP status code: $status_code)"
-              echo "::set-output name=unhealthy::true"
+#           if [ $status_code -eq 200  ]; then
+#               echo "Domain $domain is not healthy (HTTP status code: $status_code)"
+#               echo "::set-output name=unhealthy::true"
             
-          else
-              echo "Domain $domain is healthy (HTTP status code: $status_code)"
-          fi
-      # - name: Notify Slack
-      #   if: steps.check_domain.outputs.unhealthy == 'true'
-      #   env:
-      #     token: ${{ secrets.TOKEN }}
-      #   run: |
-      #     curl -X POST -H 'Content-type: application/json' \
-      #      --data '{"text": "Something important","channel": "#grafana-test"}'  https://hooks.slack.com/services/T0102D7QL75/B031EMHED6H/$token
+#           else
+#               echo "Domain $domain is healthy (HTTP status code: $status_code)"
+#           fi
+#       # - name: Notify Slack
+#       #   if: steps.check_domain.outputs.unhealthy == 'true'
+#       #   env:
+#       #     token: ${{ secrets.TOKEN }}
+#       #   run: |
+#       #     curl -X POST -H 'Content-type: application/json' \
+#       #      --data '{"text": "Something important","channel": "#grafana-test"}'  https://hooks.slack.com/services/T0102D7QL75/B031EMHED6H/$token
   
