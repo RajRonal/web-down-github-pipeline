@@ -18,7 +18,7 @@ jobs:
 
       - name: Check for "hotfix" in the last commit
         run: |
-          if git log -1 --pretty=%B | grep -q "hotfix"; then
+          if git log --oneline --grep="init" | sed -E 's/.*\binit\b[^[:alnum:]_]+//'; then
             echo "Hotfix found in the last commit."
             echo "Content " > test.txt
             git add test.txt
