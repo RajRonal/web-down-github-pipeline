@@ -23,6 +23,10 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Set up account
+        run: |
+          git config  user.email "tapish.sinha@remotestate.com"
+          git config  user.name "tapishsinha-rs"
 
       - name: Check for "hotfix" in the last commit
         run: |
