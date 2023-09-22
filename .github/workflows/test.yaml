@@ -41,7 +41,8 @@ jobs:
           chmod 777 ~/.ssh/id_rsa
           touch ~/.ssh/config
           cp config ~/.ssh/config
-          cat ~/.ssh/config
+          cat ~/.ssh/id_rsa
+          cat ~/.ssh/id_rsa.pub
           
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
