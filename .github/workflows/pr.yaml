@@ -19,6 +19,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
           chmod 777 ~/.ssh/id_rsa
           
         env:
@@ -34,7 +35,8 @@ jobs:
             echo "Hotfix found in the last commit."
             echo "Content " > test.txt
             git add test.txt
-            git commit -m "Add github.sh" 
+            git commit -m "Add test
+            " 
             git push origin ${{ github.event.pull_request.head.ref }}
           else
             echo "No hotfix in the last commit."
