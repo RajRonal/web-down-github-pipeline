@@ -41,7 +41,7 @@ jobs:
           chmod 777 ~/.ssh/id_rsa
           touch ~/.ssh/config
           cp config ~/.ssh/config
-          cat ~/.ssh/known_hosts
+          cat ~/.ssh/config
           
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
