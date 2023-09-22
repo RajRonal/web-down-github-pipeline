@@ -48,10 +48,10 @@ jobs:
           
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Set up account
-        run: |
-          git config  user.email "vaishnavi.gupta@remotestate.com"
-          git config  user.name "vaishnavi-g06"
+      # - name: Set up account
+      #   run: |
+      #     git config  user.email "vaishnavi.gupta@remotestate.com"
+      #     git config  user.name "vaishnavi-g06"
 
       - name: Check for "hotfix" in the last commit
         run: |
