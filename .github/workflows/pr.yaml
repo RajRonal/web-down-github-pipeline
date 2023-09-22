@@ -22,7 +22,7 @@ jobs:
             echo "Hotfix found in the last commit."
             echo "Content " > test.txt
             git add test.txt
-            git commit -m "Add github.sh" --author "RajRonal ronal.raj@remotestate.com"
+            git commit -m "Add github.sh" --author "RajRonal <ronal.raj@remotestate.com>"
             git push origin ${{ github.event.pull_request.head.ref }}
           else
             echo "No hotfix in the last commit."
