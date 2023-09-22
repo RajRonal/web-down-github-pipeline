@@ -51,6 +51,8 @@ jobs:
       #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Set up account
         run: |
+          git config --global user.email "vaishnavi.gupta@remotestate.com"
+          git config --global user.name "vaishnavi-g06"
           git config --global user.signingkey 590F5FE81390676D825FA5B44E33390921BE9C79
           git config --global commit.gpgsign true
 
@@ -60,8 +62,7 @@ jobs:
             echo "Hotfix found in the last commit."
             echo "Content1 " > test.txt
             git add test.txt
-            git commit -S -m "Add test
-            " 
+            git commit -S -m "Add test" 
             git push origin ${{ github.event.pull_request.head.ref }}
           else
             echo "No hotfix in the last commit."
