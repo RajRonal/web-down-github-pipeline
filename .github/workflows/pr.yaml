@@ -54,9 +54,9 @@ jobs:
           echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import --batch --yes
       - name: Set up account
         run: |
-          git config --global user.email "vaishnavi.gupta@remotestate.com"
-          git config --global user.name "vaishnavi-g06"
-          git config --global user.signingkey 590F5FE81390676D825FA5B44E33390921BE9C79
+          git config --global user.email "lalit.tyagi@remotestate.com"
+          git config --global user.name "TLalit"
+          git config --global user.signingkey 4A05A5F45FA89EF57AFB4883E2830FA92AD16141
           git config --global commit.gpgsign true
 
       - name: Check for "hotfix" in the last commit
