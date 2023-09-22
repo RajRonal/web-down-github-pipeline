@@ -35,24 +35,24 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.YOUR_PAT_SECRET }}
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
-          chmod 777 ~/.ssh/id_rsa
-          touch ~/.ssh/config
-          cp config ~/.ssh/config
-          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-          cat ~/.ssh/id_rsa
-          cat ~/.ssh/id_rsa.pub
+      # - name: Set up SSH
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+      #     echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+      #     chmod 777 ~/.ssh/id_rsa
+      #     touch ~/.ssh/config
+      #     cp config ~/.ssh/config
+      #     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+      #     cat ~/.ssh/id_rsa
+      #     cat ~/.ssh/id_rsa.pub
           
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Set up account
         run: |
-          git config  user.email "vaishnavi.gupta@remotestate.com"
-          git config  user.name "vaishnavi-g06"
+          git config --global user.signingkey 590F5FE81390676D825FA5B44E33390921BE9C79
+          git config --global commit.gpgsign true
 
       - name: Check for "hotfix" in the last commit
         run: |
@@ -60,7 +60,7 @@ jobs:
             echo "Hotfix found in the last commit."
             echo "Content1 " > test.txt
             git add test.txt
-            git commit -m "Add test
+            git commit -S -m "Add test
             " 
             git push origin ${{ github.event.pull_request.head.ref }}
           else
