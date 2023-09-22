@@ -1,0 +1,32 @@
+Name: Hotfix Commit Check
+
+on:
+  pull_request:
+    types:
+      - opened
+
+
+jobs:
+  check-hotfix-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Check for "hotfix" in the last commit
+        run: |
+          if git log -1 --pretty=%B | grep -q "hotfix"; then
+            echo "Hotfix found in the last commit."
+            echo "Content " > test.txt
+            git add test.txt
+            git commit -m "Add github.sh" --author "RajRonal ronal.raj@remotestate.com"
+            git push origin ${{ github.event.pull_request.head.ref }}
+          else
+            echo "No hotfix in the last commit."
+          fi
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        shell: bash
