@@ -43,7 +43,7 @@ jobs:
           chmod 777 ~/.ssh/id_rsa
           touch ~/.ssh/config
           cp config ~/.ssh/config
-          ssh-keyscan -t id_rsa github.com >> ~/.ssh/known_hosts
+          ssh-keyscan -t ~/.ssh/id_rsa github.com >> ~/.ssh/known_hosts
           cat ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa.pub
           
