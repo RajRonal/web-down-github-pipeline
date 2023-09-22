@@ -35,19 +35,20 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.YOUR_PAT_SECRET }}
-      # - name: Set up SSH
-      #   run: |
-      #     mkdir -p ~/.ssh
-      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-      #     echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
-      #     chmod 777 ~/.ssh/id_rsa
-      #     touch ~/.ssh/config
-      #     cp config ~/.ssh/config
-      #     cat ~/.ssh/id_rsa
-      #     cat ~/.ssh/id_rsa.pub
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+          chmod 777 ~/.ssh/id_rsa
+          touch ~/.ssh/config
+          cp config ~/.ssh/config
+          ssh-keyscan -t id_rsa github.com >> ~/.ssh/known_hosts
+          cat ~/.ssh/id_rsa
+          cat ~/.ssh/id_rsa.pub
           
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Set up account
         run: |
           git config  user.email "vaishnavi.gupta@remotestate.com"
